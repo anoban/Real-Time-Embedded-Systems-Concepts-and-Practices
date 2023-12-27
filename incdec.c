@@ -32,4 +32,9 @@ static void* __attribute((noinline)) TaskDec(void* thread_props) {
     return NULL;
 }
 
-int main(void) { }
+// Linux typically load balances around every 200 milliseconds.
+
+int main(void) {
+    puts("Completed!");
+    return EXIT_SUCCESS;
+}
