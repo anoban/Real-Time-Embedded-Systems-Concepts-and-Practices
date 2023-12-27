@@ -7,7 +7,7 @@
 #include <sched.h>       // header for schedulers
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h>      // EXIT_SUCCESS
 
 #define NTHREADS 1024LLU // number of threads to execute in parallel
 
@@ -19,11 +19,11 @@ typedef struct tag_ThreadParams {
 } ThreadParams_t;
 #pragma pack(pop)
 
-static pthread_t      threads[NTHREADS]; // pthread structs
-static ThreadParams_t thread_parameters[NTHREADS];
+static pthread_t                     threads[NTHREADS]; // pthread structs
+static ThreadParams_t                thread_parameters[NTHREADS];
 
 // a pthread task needs to have void * (*)(void *) signature.
-static inline void*   Task(void* thread_parameter) {
+static __attribute((noinline)) void* Task(void* thread_parameter) {
     // this explicit cast is used since the function entails type erasure.
     const ThreadParams_t* threadparam = (ThreadParams_t*) thread_parameter;
     uint64_t              sum         = 0;
