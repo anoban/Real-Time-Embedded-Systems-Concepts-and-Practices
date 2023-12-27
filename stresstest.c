@@ -9,6 +9,7 @@
 #define NTHREADS 1000LLU
 
 static inline void* Kernel(void* input) {
+    // enabling optimizations will make this whole block into a noop
     long double sum = 0.0L;
     for (size_t i = 0; i < ULONG_MAX; ++i) sum += i;
     return NULL;
