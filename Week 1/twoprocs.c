@@ -26,7 +26,6 @@
 int main(void) {
     int               childprocess_id = 0;
     int               stat = 0, return_value = 0;
-    pid_t             thisprocess_id  = 0;
 
     // semaphores
     sem_t *           child_semaphore = NULL, *parent_semaphore = NULL;

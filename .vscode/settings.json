@@ -1,0 +1,18 @@
+{
+    "C_Cpp.default.compileCommands": "gcc",
+    "C_Cpp.default.compilerArgs": [
+        "-Wall",
+        "-std=c17",
+        "-Wpedantic",
+        "-c"
+    ],
+    "C_Cpp.default.compilerPath": "\\\\wsl.localhost\\Debian\\usr\\bin\\gcc",
+    // usr\bin\gcc didn't work either
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.includePath": [
+        "\\\\wsl.localhost\\Debian\\usr\\include"
+        // usr\include didn't work either
+    ],
+    "C_Cpp.default.intelliSenseMode": "linux-gcc-x64"
+}
