@@ -387,9 +387,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
-# Images
-*.bmp
-*.png
-*.jpeg
-*.jpg
