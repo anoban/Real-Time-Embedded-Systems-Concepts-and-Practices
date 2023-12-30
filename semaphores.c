@@ -61,6 +61,9 @@ int main(void) {
     // int sem_init(sem_t *sem, int pshared, unsigned int value);
     sem_init(&semaphore, 0, 0); // the second flag is used to signal whether this semaphore is used by multiple processes.
                                 // if so, it must be 1 else it should be 0
+                                // the third argument is the value the semaphore is initialized with
+                                
+    sem_destroy(&semaphore);
 
     return EXIT_SUCCESS;
 }

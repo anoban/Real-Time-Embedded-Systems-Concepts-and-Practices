@@ -8,10 +8,10 @@
 // gcc -Wall -Wpedantic -std=c17 -O0 -g0 stresstest.c -o stresstest.exe
 #define NTHREADS 1000LLU
 
-static inline void* Kernel(void* input) {
+static __attribute((noinline)) void* Kernel(void* input) {
     // enabling optimizations will make this whole block into a noop
     long double sum = 0.0L;
-    for (size_t i = 0; i < ULONG_MAX; ++i) sum += i;
+    for (size_t i = 0; i < UCHAR_MAX; ++i) sum += i;
     return NULL;
 }
 

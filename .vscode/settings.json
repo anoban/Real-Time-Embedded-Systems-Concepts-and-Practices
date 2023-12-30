@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.clang-format": "yaml",
+        "*.clang-tidy": "yaml",
+        "stdatomic.h": "c",
+        "stdio.h": "c"
+    }
+}
