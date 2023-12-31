@@ -11,7 +11,7 @@
 				"-fdiagnostics-color=always",
 				"-ggdb",
 				"-g3",
-				"-O0",
+				"-Og",
 				"${file}",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.exe"
