@@ -1,5 +1,5 @@
 -------
-### ___Using a Debian WSL2 install on a Windows 11 machine to learn the materials and complete the assignments, without the recommended Raspberry Pi3b+, let's see how this goes :)___
+### ___Using a MYSY2 installed UCRT64 on a Windows 11 machine to learn the materials and complete the assignments, without the recommended Raspberry Pi3b+, let's see how this goes :)___
 -------
 
 ### ___Learning Objectives:___
