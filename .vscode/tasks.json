@@ -3,8 +3,8 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: gcc-12 build active file",
-			"command": "/usr/bin/gcc-12",
+			"label": "C/C++: gcc build active file",
+			"command": "C:/msys64/ucrt64/bin/gcc.exe",
 			"args": [
 				"-DDEBUG",
 				"-D_DEBUG",
@@ -14,7 +14,7 @@
 				"-O0",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}.out"
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -26,7 +26,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: /usr/bin/gcc-12"
-		}
+			"detail": "compiler: C:/msys64/ucrt64/bin/gcc.exe"
+		},
 	]
 }
