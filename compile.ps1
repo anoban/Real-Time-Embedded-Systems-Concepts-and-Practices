@@ -16,14 +16,20 @@ if ($unrecognized.Count -ne 0) {
     Exit 1
 }
 
+$exe = $cfiles[0].Replace(".c", ".exe")
+
 $cflags = @( 
-    "-mavx"
     "-O3",
     "-g0",
+    "-march=native",
+    "-latomic",
+    "-lpthread",
     "-std=c17"
     "-Wall",
     "-Wextra",
-    "-Wpedantic"
+    "-Wpedantic",
+    "-Wl,--stack,16777216",
+    "-o${exe}"  # do not leae a space beofre -o and ${}
 )
 
 Write-Host "gcc.exe ${cfiles} ${cflags}" -ForegroundColor Cyan
