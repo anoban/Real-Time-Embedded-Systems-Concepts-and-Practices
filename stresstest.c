@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 // disable optimizations
-// gcc -Wall -Wpedantic -std=c17 -O0 -g0 stresstest.c -o stresstest.exe
+// clang -Wall -Wpedantic -std=c17 -O0 -g0 stresstest.c -o stresstest.out
 #define NTHREADS 1000LLU
 static _Atomic long double           sum = 0.0L;
 

@@ -12,6 +12,6 @@ static inline long double factorial(unsigned short value) {
 
 int main(void) {
     for (int i = 0; i < 200; ++i)
-        printf_s("Factorial of %4d is %10.6LE\n" /* LE is needed for gcc, E alone won't work since it is for floats */, i, factorial(i));
+        printf("Factorial of %4d is %10.6LE\n" /* LE is needed for gcc, E alone won't work since it is for floats */, i, factorial(i));
     return EXIT_SUCCESS;
 }

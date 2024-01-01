@@ -43,7 +43,7 @@ int main(void) {
     for (size_t i = 0; i < NTHREADS; ++i) pthread_join(threads[i], NULL);
     elapsed = clock() - start;
     sem_close(&semaphore);
-    wprintf_s(L"Sum is %lld, took %ld ticks!\n", global, elapsed);
+    wprintf(L"Sum is %lld, took %ld ticks!\n", global, elapsed);
 
     start = elapsed = global = 0;
 
@@ -53,7 +53,7 @@ int main(void) {
     for (size_t i = 0; i < NTHREADS; ++i) pthread_join(threads[i], NULL);
     elapsed = clock() - start;
     sem_close(&semaphore);
-    wprintf_s(L"Sum is %lld, took %ld ticks!\n", global, elapsed);
+    wprintf(L"Sum is %lld, took %ld ticks!\n", global, elapsed);
 
     return EXIT_SUCCESS;
 }

@@ -1,32 +1,31 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: gcc build active file",
-			"command": "C:/msys64/ucrt64/bin/gcc.exe",
-			"args": [
-				"-DDEBUG",
-				"-D_DEBUG",
-				"-fdiagnostics-color=always",
-				"-ggdb",
-				"-g3",
-				"-Og",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"detail": "compiler: C:/msys64/ucrt64/bin/gcc.exe"
-		},
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-DDEBUG",
+                "-D_DEBUG",
+                "-ggdb",
+                "-g3",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.out",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "-std=c2x"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: /usr/bin/gcc"
+        },
+    ]
 }

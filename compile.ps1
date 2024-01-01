@@ -22,8 +22,8 @@ $cflags = @(
     "-O3",
     "-g0",
     "-march=native",
-    "-latomic",
-    "-lpthread",
+    "-latomic",     # work around some errors that occur with _Atomic floats and doubles, link the libatomic library
+    "-lpthread",    # link pthread
     "-std=c17"
     "-Wall",
     "-Wextra",
