@@ -1,3 +1,4 @@
+#include <wchar.h>  // Linux requires wchar.h to make the unicode variants of stdio functions available
 #include <fcntl.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -45,44 +46,47 @@ int main(void) {
 
     // both semaphores will be alternating ITERMAX times
     // intentional assignment
-    if (childprocess_id = fork() /* != 0 */) { // if the current process is the parent
+    if ((childprocess_id = fork()) > 0) { // if the current process is the parent
 
-        _putws(L"Inside parent process!");
+        fputws(L"Inside parent process!",stdout);
         for (size_t i = 0; i < ITERMAX; ++i) {
             // open child process's semaphore, this statement needs to execute in order for the sem_wait(&childproc_semaphore) of child proc
             // to execute
-            if (sem_post(&childproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_post(&childproc_semaphore) @LINE %d\n", __LINE__);
+            if (sem_post(childproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_post(&childproc_semaphore) @LINE %d\n", __LINE__);
             for (size_t i = 0; i < ITERMAX; ++i) sumg++;
             // close this (parent) process's semaphore
-            if (sem_wait(&parentproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_wait(&parentproc_semaphore) @LINE %d\n", __LINE__);
+            if (sem_wait(parentproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_wait(&parentproc_semaphore) @LINE %d\n", __LINE__);
         }
 
-        wprintf_s(L"gsum is %llu: Message from parent\n", sumg);
+        wprintf(L"gsum is %llu: Message from parent\n", sumg);
 
         // parent proc was the one that created the semaphores, so it has to close and unlink those semaphores!
-        if (sem_close(&childproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_close(&childproc_semaphore) @LINE %d\n", __LINE__);
-        if (sem_close(&parentproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_close(&parentproc_semaphore) @LINE %d\n", __LINE__);
+        if (sem_close(childproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_close(&childproc_semaphore) @LINE %d\n", __LINE__);
+        if (sem_close(parentproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_close(&parentproc_semaphore) @LINE %d\n", __LINE__);
 
-        if (sem_unlink("cprocsem") < 0) fwprintf_s(stderr, L"Error in sem_unlink(\"cprocsem\") @LINE %d\n", __LINE__);
-        if (sem_unlink("pprocsem") < 0) fwprintf_s(stderr, L"Error in sem_unlink(\"pprocsem\") @LINE %d\n", __LINE__);
+        if (sem_unlink("cprocsem") < 0) fwprintf(stderr, L"Error in sem_unlink(\"cprocsem\") @LINE %d\n", __LINE__);
+        if (sem_unlink("pprocsem") < 0) fwprintf(stderr, L"Error in sem_unlink(\"pprocsem\") @LINE %d\n", __LINE__);
 
         return EXIT_SUCCESS;
 
-    } else {                                   // if the current process is the child
+    } else if(childprocess_id == 0) {                                   // if the current process is the child
 
-        _putws(L"Inside child process!");
+        fputws(L"Inside child process!",stdout);
         for (size_t i = 0; i < ITERMAX; ++i) { // close and open semaphores ITERMAX times iteratively
             // we're locking the child process's semaphore, whose value is initially zero
             // unless another thread or process increments its value, this statement won't execute
-            if (sem_wait(&childproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_wait(&childproc_semaphore) @LINE %d\n", __LINE__);
+            if (sem_wait(childproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_wait(&childproc_semaphore) @LINE %d\n", __LINE__);
             for (size_t i = 0; i < ITERMAX; ++i) sumg++;
             // we are opening the parent process's semaphore, whose value becomes 1
             // this statement needs to be executed in order for the parent proc's sem_wait(&parentproc_semaphore) to be executed
-            if (sem_post(&parentproc_semaphore) < 0) fwprintf_s(stderr, L"Error in sem_post(&parentproc_semaphore) @LINE %d\n", __LINE__);
+            if (sem_post(parentproc_semaphore) < 0) fwprintf(stderr, L"Error in sem_post(&parentproc_semaphore) @LINE %d\n", __LINE__);
         }
 
-        wprintf_s(L"gsum is %llu: Message from child\n", sumg);
+        wprintf(L"gsum is %llu: Message from child\n", sumg);
 
         return EXIT_SUCCESS;
+    }else{
+        fputws(L"fork failed",stderr);
+        return EXIT_FAILURE;
     }
 }
