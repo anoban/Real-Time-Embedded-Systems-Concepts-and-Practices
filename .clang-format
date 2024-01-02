@@ -32,129 +32,17 @@ AlignArrayOfStructures: Right        # Align array column and right justify the 
                                      #       { 7,     5,    "!!"}
                                      #   };
 
-AlignConsecutiveAssignments:
-  Enabled:         true
-  #define SHORT_NAME       42
-  #define LONGER_NAME      0x007f
-  #define EVEN_LONGER_NAME (2)
-  #define foo(x)           (x * x)
-  #define bar(y, z)        (y + z)
+AlignConsecutiveAssignments:  AcrossEmptyLines # clang-format 14 compatibility compromise
   
-  # int a            = 1;
-  # int somelongname = 2;
-  # double c         = 3;
-  # 
-  # int aaaa : 1;
-  # int b    : 12;
-  # int ccc  : 8;
-  # 
-  # int         aaaa = 12;
-  # float       b = 23;
-  # std::string ccc;
+AlignConsecutiveBitFields:  AcrossEmptyLines # clang-format 14 compatibility compromise
   
-  AcrossEmptyLines: true
-  # if set to true;
-  # int a            = 1;
-  # int somelongname = 2;
-  # double c         = 3;
-  # 
-  # int d            = 3;
-  
-  # if set to false;
-  # int a            = 1;
-  # int somelongname = 2;
-  # double c         = 3;
-  # 
-  # int d = 3;
-  
-  AcrossComments:  true
-  # if set to true;
-  # int d    = 3;
-  # /* A comment. */
-  # double e = 4;
-   
-  # if set to false;
-  # int d = 3;
-  # /* A comment. */
-  # double e = 4;
-  
-  AlignCompound:   true
-  # if set to true;
-  # a   += 2;
-  # bbb  = 2;
-  
-  # if set to false;
-  # a += 2;
-  # bbb = 2;
-  
-  PadOperators:    true
-  # if set to true;
-  # a   >>= 2;
-  # bbb   = 2;
-  # 
-  # a     = 2;
-  # bbb >>= 2;
-  
-  # if set to false;
-  # a >>= 2;
-  # bbb = 2;
-  # 
-  # a     = 2;
-  # bbb >>= 2;
-  
-AlignConsecutiveBitFields:      # Same as `AlignConsecutiveAssignments`, but for bitfields.
-  Enabled:         true
-  AcrossEmptyLines: true
-  AcrossComments:  true
-  AlignCompound:   true
-  PadOperators:    true
-  
-AlignConsecutiveDeclarations:   # Same as `AlignConsecutiveAssignments`, but for declarations.
-  Enabled:         true
-  AcrossEmptyLines: true
-  AcrossComments:  true
-  AlignCompound:   true
-  PadOperators:    true
+AlignConsecutiveDeclarations:  AcrossEmptyLines # clang-format 14 compatibility compromise
 
-AlignConsecutiveMacros:         # Same as `AlignConsecutiveAssignments`, but for macro definitions.
-  Enabled:         true
-  AcrossEmptyLines: true
-  AcrossComments:  true
-  AlignCompound:   true
-  PadOperators:    true
+AlignConsecutiveMacros: AcrossEmptyLines   # clang-format 14 compatible option
+# Same as `AlignConsecutiveAssignments`, but for macro definitions.
+# needs clang-format 15 or later for the detailed binary specifications to be used, but Debian defaults to clang-format 14.0.6
 
-AlignConsecutiveShortCaseStatements:
-  Enabled:         true
-  # if set to true;
-  # switch (level) {
-  # case log::info:    return "info:";
-  # case log::warning: return "warning:";
-  # default:           return "";
-  # }
-  
-  # if set to false;
-  # switch (level) {
-  # case log::info: return "info:";
-  # case log::warning: return "warning:";
-  # default: return "";
-  # }
-  
-  AcrossEmptyLines: true
-  AcrossComments:  true
-  AlignCaseColons: true
-  # if set to true;
-  # switch (level) {
-  # case log::info   : return "info:";
-  # case log::warning: return "warning:";
-  # default          : return "";
-  # }
-  
-  # if set to false;
-  # switch (level) {
-  # case log::info:    return "info:";
-  # case log::warning: return "warning:";
-  # default:           return "";
-  # }
+# AlignConsecutiveShortCaseStatements: unavailable in clang-format 14
 
 AlignEscapedNewlines: Right     # #define A                               \
                                 # int aaaa;                               \
@@ -164,15 +52,7 @@ AlignEscapedNewlines: Right     # #define A                               \
 AlignOperands:   Align          # int aaa = bbbbbbbbbbbbbbb +
                                 #           ccccccccccccccc;
           
-AlignTrailingComments:
-  Kind:            Always
-  OverEmptyLines:  5
-# int a;      // all these
-# 
-# int ab;     // comments are
-# 
-# 
-# int abcdef; // aligned
+AlignTrailingComments: true # clang-format 14 compatibility compromise
 
 AllowAllArgumentsOnNextLine: true     # If a function call or braced initializer list doesn't fit on a line, allow putting ALL arguments
                                       # onto the next line, even if BinPackArguments is false.
@@ -377,19 +257,8 @@ BraceWrapping:
   SplitEmptyNamespace: false    # If false, empty namespace body can be put on a single line. This option is used only if
                                 # the opening brace of the namespace has already been wrapped 
 
-BreakAfterAttributes: Never     # Break after a group of C++11 attributes before a function declaration/definition name.
-# If set to Never;
-# [[nodiscard]] inline int f();
-# [[gnu::const]] [[nodiscard]] int g();
-
-BreakArrays:     false                # This is currently only for formatting JSON.
-# if set to true;                     if set to false;
-# [                          vs.      [1, 2, 3, 4]
-#   1,
-#   2,
-#   3,
-#   4
-# ]
+# BreakAfterAttributes: Never - unavailable in clang-format 14
+# BreakArrays - unavailable in clang-format 14
 
 BreakBeforeBinaryOperators: None
 # Break after operators.
@@ -402,11 +271,9 @@ BreakBeforeBinaryOperators: None
 #              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa >
 #                  ccccccccccccccccccccccccccccccccccccccccc;
 
-BreakBeforeConceptDeclarations: Never     # The concept declaration style to use.
-# Keep the template declaration line together with concept.
-# template <typename T> concept C = ...;
+BreakBeforeConceptDeclarations: false # clang-format 14 compatibility compromise
 
-BreakBeforeInlineASMColon: OnlyMultiline
+# BreakBeforeInlineASMColon: OnlyMultiline - unavailable in clang-format 14
 
 BreakBeforeTernaryOperators: false        # If true, ternary operators will be placed after line breaks.
 # if set to true;
@@ -643,20 +510,7 @@ IndentPPDirectives: BeforeHash          # he preprocessor directive indenting st
 #    #endif
 #  #endif
 
-IndentRequiresClause: true
-# If set to true;
-# template <typename It>
-#   requires Iterator<It>
-# void sort(It begin, It end) {
-#   //....
-# }
-
-# If set to false;
-# template <typename It>
-# requires Iterator<It>
-# void sort(It begin, It end) {
-#   //....
-# }
+# IndentRequiresClause: true - unavailable in clang-format 14
 
 IndentWidth:     4                     # The number of columns to use for indentation.
 
@@ -669,10 +523,8 @@ IndentWrappedFunctionNames: false      # Indent if a function definition or decl
 # LoooooooooooooooooooooooooooooooooooooooongReturnType
 # LoooooooooooooooooooooooooooooooongFunctionDeclaration();
 
-InsertBraces:    false                 # Insert braces after control statements (if, else, for, do, and while) in C++ unless the control  
-                                       # statements are inside macro definitions or the braces would enclose preprocessor directives.
-                                       
-InsertNewlineAtEOF: false
+# InsertBraces:    false - unavailable in clang-format 14
+# InsertNewlineAtEOF: false - unavailable in clang-format 14
 
 InsertTrailingCommas: None             # insert trailing commas in container literals (arrays and objects) that wrap across multiple lines.
                                        # It is currently only available for JavaScript.
@@ -683,18 +535,7 @@ InsertTrailingCommas: None             # insert trailing commas in container lit
 # //                        ^ inserted
 # ]
 
-IntegerLiteralSeparator:              # Format integer literal separators (' for C++)
-                                      # If negative, remove separators. If 0, leave the literal as is. If positive,
-                                      # insert separators between digits starting from the rightmost digit.
-                                      # You can also specify a minimum number of digits (BinaryMinDigits, DecimalMinDigits, and HexMinDigits)
-                                      # the integer literal must have in order for the separators to be inserted.
-# This is for C, as C does not recognize these separators!
-  Binary:           0
-  BinaryMinDigits:  0
-  Decimal:          0
-  DecimalMinDigits: 0
-  Hex:              0
-  HexMinDigits:     0
+# IntegerLiteralSeparator: unavailable in clang-format 14
 
 KeepEmptyLinesAtTheStartOfBlocks: false  # If true, the empty line at the start of blocks is kept.
 # If set to true;                        If set to false;
@@ -703,7 +544,7 @@ KeepEmptyLinesAtTheStartOfBlocks: false  # If true, the empty line at the start 
 #   bar();                               }
 # }
 
-KeepEmptyLinesAtEOF: false
+# KeepEmptyLinesAtEOF: false - unavailable in clang-format 14
 
 LambdaBodyIndentation: Signature       # The indentation style of lambda bodies. Signature (the default) causes the lambda body to be indented
                                        # one additional level relative to the indentation level of the signature. OuterScope forces the lambda
@@ -724,7 +565,7 @@ LambdaBodyIndentation: Signature       # The indentation style of lambda bodies.
 #   return;
 # }));
 
-LineEnding:      CRLF
+# LineEnding:      CRLF - unavailable in clang-format 14
 
 MacroBlockBegin: ''
 
@@ -789,70 +630,8 @@ ReflowComments:  true                    # If true, clang-format will attempt to
 
 RemoveBracesLLVM: true                  # Remove optional braces of control statements (if, else, for, and while) in C++ according to the LLVM coding style.
 
-RemoveParentheses: ReturnStatement       # Remove redundant parentheses.
-# If set to Leave;
-# class __declspec((dllimport)) X {};
-# co_return (((0)));
-# return ((a + b) - ((c + d)));
-
-# If set to ReturnStatement;
-# class __declspec(dllimport) X {};
-# co_return 0;
-# return (a + b) - (c + d);
-
-RemoveSemicolon: false                  # Remove semicolons after the closing brace of a non-empty function.
-
-RequiresClausePosition: SingleLine
-# If set to WithPreceding;
-# Try to put the clause together with the preceding part of a declaration. 
-# For class templates: stick to the template declaration. For function templates: stick to the template declaration.
-# For function declaration followed by a requires clause: stick to the parameter list.
-
-# template <typename T> requires C<T>
-# struct Foo {...
- 
-# template <typename T> requires C<T>
-# void bar(T t) {...
- 
-# template <typename T>
-# void baz(T t) requires C<T>
-# {...
- 
-# If set to WithFollowing;
-# Try to put the requires clause together with the class or function declaration.
-
-# template <typename T>
-# requires C<T> struct Foo {...
- 
-# template <typename T>
-# requires C<T> void bar(T t) {...
- 
-# template <typename T>
-# void baz(T t)
-# requires C<T> {...
-
-# If set to SingleLine;
-# Try to put everything in the same line if possible. Otherwise normal line breaking rules take over.
- 
-# // Fitting:
-# template <typename T> requires C<T> struct Foo {...
-# template <typename T> requires C<T> void bar(T t) {...
-# template <typename T> void bar(T t) requires C<T> {...
- 
-# // Not fitting, one possible example:
-# template <typename LongName>
-# requires C<LongName>
-# struct Foo {...
- 
-# template <typename LongName>
-# requires C<LongName>
-# void bar(LongName ln) {
- 
-# template <typename LongName>
-# void bar(LongName ln)
-#     requires C<LongName> {
- 
-RequiresExpressionIndentation: OuterScope
+# RemoveParentheses: ReturnStatement - unavailable in clang-format 14
+# RemoveSemicolon: false - unavailable in clang-format 14
 
 SeparateDefinitionBlocks: Leave               # Specifies the use of empty lines to separate definition blocks, including classes, structs,
                                               # enums, and functions.
@@ -861,16 +640,7 @@ ShortNamespaceLines: 1
 
 SortIncludes:    CaseInsensitive              #  Includes are sorted in an alphabetical or case insensitive fashion.
 
-SortUsingDeclarations: Lexicographic
-# Using declarations are sorted in the order defined as follows: Split the strings by “::” and discard any initial empty strings.
-# Sort the lists of names lexicographically, and within those groups, names are in case-insensitive lexicographic order.
-
-# If set to Lexicographic;
-# using boost::regex;
-# using boost::regex_constants::icase;
-# using std::chrono::duration_cast;
-# using std::move;
-# using std::string;
+SortUsingDeclarations: true  # clang-format 14 compatibility compromise
 
 SpaceAfterCStyleCast: true
 # If set to true;                        If set to false;
@@ -894,7 +664,7 @@ SpaceBeforeCtorInitializerColon: true
 
 SpaceBeforeInheritanceColon: true
 
-SpaceBeforeJsonColon: true
+# SpaceBeforeJsonColon: true - unavailable in clang-format 14
 
 SpaceBeforeParens: Custom
 
@@ -905,8 +675,8 @@ SpaceBeforeParensOptions:
   AfterFunctionDeclarationName: false
   AfterIfMacros:   true
   AfterOverloadedOperator: false
-  AfterRequiresInClause: false
-  AfterRequiresInExpression: false
+  # AfterRequiresInClause: false - clang-format 14 compatibility compromise
+  # AfterRequiresInExpression: false
   BeforeNonEmptyParentheses: false
   
 SpaceBeforeRangeBasedForLoopColon: true
@@ -925,13 +695,8 @@ SpacesInLineCommentPrefix:
   Minimum:         1
   Maximum:         -1
   
-SpacesInParens:  Custom
-
-SpacesInParensOptions:
-  InCStyleCasts:   false
-  InConditionalStatements: false
-  InEmptyParentheses: false
-  Other:           false
+# SpacesInParens:  Custom - unavailable in clang-format 14
+# SpacesInParensOptions - unavailable in clang-format 14
   
 SpacesInSquareBrackets: false
 Standard:        c++20
