@@ -1,5 +1,5 @@
 -------
-### ___Using a MYSY2 installed UCRT64 on a Windows 11 machine to learn the materials and complete the assignments, without the recommended Raspberry Pi3b+, let's see how this goes :)___
+### ___Using WSL2 Debian Bullseye on Windows 11 machine to learn the materials and complete the assignments, without the recommended Raspberry Pi 3b+, let's see how this goes :)___
 -------
 
 ### ___Learning Objectives:___
