@@ -1,7 +1,9 @@
 Get-ChildItem *.exe -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.out -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
+Get-ChildItem *.a   -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.obj -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.o   -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
+Get-ChildItem *.so   -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.pdb -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.exp -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
 Get-ChildItem *.dll -Recurse | Foreach-Object {Remove-Item $_.FullName -Force}
